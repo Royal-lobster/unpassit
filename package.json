@@ -1,11 +1,11 @@
 {
-  "name": "unlockit",
+  "name": "unpassit",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "unlockit": "./dist/cli.js"
+    "unpassit": "dist/cli.js"
   },
   "files": [
     "dist"
@@ -38,7 +38,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/srujangurram/unlockit.git"
+    "url": "git+https://github.com/srujangurram/unpassit.git"
   },
   "dependencies": {
     "7zip-min": "^3.0.1",

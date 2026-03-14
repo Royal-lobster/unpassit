@@ -1,37 +1,37 @@
-# unlockit
+# unpassit
 
 Remove passwords from protected files. Supports PDF, Office (doc/docx/xls/xlsx/ppt/pptx), ZIP, RAR, and 7z.
 
 ## Usage
 
 ```bash
-npx unlockit file.pdf -p mypassword
+npx unpassit file.pdf -p mypassword
 ```
 
 ### Interactive password prompt
 
 ```bash
-npx unlockit file.xlsx
+npx unpassit file.xlsx
 # Enter password: ****
 ```
 
 ### Environment variable
 
 ```bash
-UNLOCKIT_PASSWORD=mypass npx unlockit file.docx
+UNLOCKIT_PASSWORD=mypass npx unpassit file.docx
 ```
 
 ### Batch mode
 
 ```bash
-npx unlockit ./locked-files/ -p mypass
-npx unlockit ./locked-files/ -p mypass -r  # recursive
+npx unpassit ./locked-files/ -p mypass
+npx unpassit ./locked-files/ -p mypass -r  # recursive
 ```
 
 ### Custom output directory
 
 ```bash
-npx unlockit file.pdf -p mypass -o ./unlocked/
+npx unpassit file.pdf -p mypass -o ./unlocked/
 ```
 
 ## Output

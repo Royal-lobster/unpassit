@@ -13,7 +13,7 @@ const pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"
 const program = new Command();
 
 program
-  .name("unlockit")
+  .name("unpassit")
   .description("Remove passwords from protected files (PDF, Office, ZIP, RAR, 7z)")
   .version(pkg.version, "-V, --version")
   .argument("<input>", "File or directory to unlock")
