@@ -11,19 +11,9 @@ export function getOutputPath(inputPath: string, outputDir?: string): string {
 }
 
 export function createTempDir(): Promise<string> {
-  return fs.promises.mkdtemp(path.join(os.tmpdir(), "unlockit-"));
+  return fs.promises.mkdtemp(path.join(os.tmpdir(), "unpassit-"));
 }
 
 export async function removeTempDir(dir: string): Promise<void> {
   await fs.promises.rm(dir, { recursive: true, force: true });
-}
-
-export function log(message: string, quiet: boolean): void {
-  if (!quiet) {
-    console.log(message);
-  }
-}
-
-export function logError(message: string): void {
-  console.error(message);
 }

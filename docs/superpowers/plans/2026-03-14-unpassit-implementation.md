@@ -1,4 +1,4 @@
-# unlockit Implementation Plan
+# unpassit Implementation Plan
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -8,7 +8,7 @@
 
 **Tech Stack:** TypeScript, commander, tsup, node-qpdf2, officecrypto-tool, unzipper, archiver, node-unrar-js, 7zip-min
 
-**Spec:** `docs/superpowers/specs/2026-03-14-unlockit-design.md`
+**Spec:** `docs/superpowers/specs/2026-03-14-unpassit-design.md`
 
 ---
 
@@ -24,7 +24,7 @@
 - [ ] **Step 1: Initialize npm project**
 
 ```bash
-cd /Users/srujangurram/Developer/Personal/unlockit
+cd /Users/srujangurram/Developer/Personal/unpassit
 npm init -y
 ```
 
@@ -79,7 +79,7 @@ Add to `package.json`:
 {
   "type": "module",
   "bin": {
-    "unlockit": "./dist/cli.js"
+    "unpassit": "./dist/cli.js"
   },
   "files": ["dist"],
   "scripts": {
@@ -204,7 +204,7 @@ export function getOutputPath(inputPath: string, outputDir?: string): string {
 }
 
 export function createTempDir(): Promise<string> {
-  return fs.promises.mkdtemp(path.join(os.tmpdir(), "unlockit-"));
+  return fs.promises.mkdtemp(path.join(os.tmpdir(), "unpassit-"));
 }
 
 export async function removeTempDir(dir: string): Promise<void> {
@@ -454,13 +454,13 @@ import assert from "node:assert";
 import { resolvePassword } from "./password.js";
 
 describe("resolvePassword", () => {
-  const originalEnv = process.env.UNLOCKIT_PASSWORD;
+  const originalEnv = process.env.UNPASSIT_PASSWORD;
 
   afterEach(() => {
     if (originalEnv === undefined) {
-      delete process.env.UNLOCKIT_PASSWORD;
+      delete process.env.UNPASSIT_PASSWORD;
     } else {
-      process.env.UNLOCKIT_PASSWORD = originalEnv;
+      process.env.UNPASSIT_PASSWORD = originalEnv;
     }
   });
 
@@ -470,13 +470,13 @@ describe("resolvePassword", () => {
   });
 
   it("falls back to env var when no flag", async () => {
-    process.env.UNLOCKIT_PASSWORD = "envpass";
+    process.env.UNPASSIT_PASSWORD = "envpass";
     const pw = await resolvePassword(undefined, false);
     assert.strictEqual(pw, "envpass");
   });
 
   it("throws when no password and not a TTY", async () => {
-    delete process.env.UNLOCKIT_PASSWORD;
+    delete process.env.UNPASSIT_PASSWORD;
     await assert.rejects(
       () => resolvePassword(undefined, false),
       { message: /No password provided/ }
@@ -501,14 +501,14 @@ export async function resolvePassword(
 ): Promise<string> {
   if (flagValue) return flagValue;
 
-  const envValue = process.env.UNLOCKIT_PASSWORD;
+  const envValue = process.env.UNPASSIT_PASSWORD;
   if (envValue) return envValue;
 
   if (isTTY) {
     return promptPassword();
   }
 
-  throw new Error("No password provided. Use -p, UNLOCKIT_PASSWORD env var, or run interactively.");
+  throw new Error("No password provided. Use -p, UNPASSIT_PASSWORD env var, or run interactively.");
 }
 
 function promptPassword(): Promise<string> {
@@ -570,7 +570,7 @@ import { getSupportedExtensions } from "./detector.js";
 const program = new Command();
 
 program
-  .name("unlockit")
+  .name("unpassit")
   .description("Remove passwords from protected files (PDF, Office, ZIP, RAR, 7z)")
   .version("1.0.0", "-V, --version")
   .argument("<input>", "File or directory to unlock")
@@ -1045,7 +1045,7 @@ describe("CLI e2e", () => {
   });
 
   it("exits with error for unsupported format", () => {
-    const tmp = path.join("/tmp", "test-unlockit.png");
+    const tmp = path.join("/tmp", "test-unpassit.png");
     fs.writeFileSync(tmp, "fake");
     try {
       assert.throws(
@@ -1100,40 +1100,40 @@ git commit -m "test: add e2e smoke tests for CLI"
 Create `README.md`:
 
 ````markdown
-# unlockit
+# unpassit
 
 Remove passwords from protected files. Supports PDF, Office (doc/docx/xls/xlsx/ppt/pptx), ZIP, RAR, and 7z.
 
 ## Usage
 
 ```bash
-npx unlockit file.pdf -p mypassword
+npx unpassit file.pdf -p mypassword
 ```
 
 ### Interactive password prompt
 
 ```bash
-npx unlockit file.xlsx
+npx unpassit file.xlsx
 # Enter password: ****
 ```
 
 ### Environment variable
 
 ```bash
-UNLOCKIT_PASSWORD=mypass npx unlockit file.docx
+UNPASSIT_PASSWORD=mypass npx unpassit file.docx
 ```
 
 ### Batch mode
 
 ```bash
-npx unlockit ./locked-files/ -p mypass
-npx unlockit ./locked-files/ -p mypass -r  # recursive
+npx unpassit ./locked-files/ -p mypass
+npx unpassit ./locked-files/ -p mypass -r  # recursive
 ```
 
 ### Custom output directory
 
 ```bash
-npx unlockit file.pdf -p mypass -o ./unlocked/
+npx unpassit file.pdf -p mypass -o ./unlocked/
 ```
 
 ## Output
@@ -1180,5 +1180,5 @@ git commit -m "docs: add README and LICENSE"
 
 - [ ] **Step 5: Verify npx works locally**
 
-Run: `npm link && unlockit --help`
+Run: `npm link && unpassit --help`
 Expected: Help text prints correctly

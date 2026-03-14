@@ -1,10 +1,10 @@
-# unlockit — Design Spec
+# unpassit — Design Spec
 
 ## Overview
 
-`unlockit` is a lightweight CLI utility (distributed via npm/npx) that removes known passwords from protected files. It auto-detects file format by extension, supports batch processing, and minimizes system dependencies.
+`unpassit` is a lightweight CLI utility (distributed via npm/npx) that removes known passwords from protected files. It auto-detects file format by extension, supports batch processing, and minimizes system dependencies.
 
-**Usage:** `npx unlockit file.pdf -p mypass`
+**Usage:** `npx unpassit file.pdf -p mypass`
 
 ## Supported Formats
 
@@ -28,32 +28,32 @@
 ### Single File
 
 ```bash
-npx unlockit file.pdf -p mypass
+npx unpassit file.pdf -p mypass
 ```
 
 ### Batch Mode (directory)
 
 ```bash
-npx unlockit ./locked-files/ -p mypass
+npx unpassit ./locked-files/ -p mypass
 ```
 
 ### Interactive Password Prompt
 
 ```bash
-npx unlockit file.xlsx
+npx unpassit file.xlsx
 # Prompts: Enter password: ****
 ```
 
 ### Environment Variable
 
 ```bash
-UNLOCKIT_PASSWORD=mypass npx unlockit file.docx
+UNPASSIT_PASSWORD=mypass npx unpassit file.docx
 ```
 
 ## Password Resolution Order
 
 1. `-p` / `--password` CLI flag
-2. `UNLOCKIT_PASSWORD` environment variable
+2. `UNPASSIT_PASSWORD` environment variable
 3. Interactive prompt via `readline` (password is hidden)
 
 If none provided and stdin is not a TTY (e.g., piped), exit with an error.
@@ -112,7 +112,7 @@ interface Handler {
 
 ### Temp Directory Strategy (ZIP/RAR handlers)
 
-- Create a temp directory via `fs.mkdtemp(path.join(os.tmpdir(), 'unlockit-'))`.
+- Create a temp directory via `fs.mkdtemp(path.join(os.tmpdir(), 'unpassit-'))`.
 - Extract files into the temp directory.
 - Re-archive (as ZIP) without password.
 - Clean up the temp directory in a `finally` block, even on failure.

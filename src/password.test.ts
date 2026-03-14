@@ -3,13 +3,13 @@ import assert from "node:assert";
 import { resolvePassword } from "./password.js";
 
 describe("resolvePassword", () => {
-  const originalEnv = process.env.UNLOCKIT_PASSWORD;
+  const originalEnv = process.env.UNPASSIT_PASSWORD;
 
   afterEach(() => {
     if (originalEnv === undefined) {
-      delete process.env.UNLOCKIT_PASSWORD;
+      delete process.env.UNPASSIT_PASSWORD;
     } else {
-      process.env.UNLOCKIT_PASSWORD = originalEnv;
+      process.env.UNPASSIT_PASSWORD = originalEnv;
     }
   });
 
@@ -19,13 +19,13 @@ describe("resolvePassword", () => {
   });
 
   it("falls back to env var when no flag", async () => {
-    process.env.UNLOCKIT_PASSWORD = "envpass";
+    process.env.UNPASSIT_PASSWORD = "envpass";
     const pw = await resolvePassword(undefined, false);
     assert.strictEqual(pw, "envpass");
   });
 
   it("throws when no password and not a TTY", async () => {
-    delete process.env.UNLOCKIT_PASSWORD;
+    delete process.env.UNPASSIT_PASSWORD;
     await assert.rejects(
       () => resolvePassword(undefined, false),
       { message: /No password provided/ }

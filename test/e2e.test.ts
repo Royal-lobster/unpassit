@@ -30,7 +30,7 @@ describe("CLI e2e", () => {
   });
 
   it("exits with error for unsupported format", () => {
-    const tmp = path.join("/tmp", "test-unlockit.png");
+    const tmp = path.join("/tmp", "test-unpassit.png");
     fs.writeFileSync(tmp, "fake");
     try {
       assert.throws(
