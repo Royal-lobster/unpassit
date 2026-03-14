@@ -14,7 +14,9 @@
   "scripts": {
     "build": "tsup",
     "dev": "tsup src/cli.ts --format esm --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx tsx --test src/**/*.test.ts",
+    "test:e2e": "npm run build && npx tsx --test test/**/*.test.ts",
+    "test:all": "npm run test && npm run test:e2e"
   },
   "keywords": [],
   "author": "",
