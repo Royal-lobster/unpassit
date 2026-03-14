@@ -1,0 +1,36 @@
+{
+  "name": "unlockit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "unlockit": "./dist/cli.js"
+  },
+  "files": ["dist"],
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "build": "tsup src/cli.ts --format esm --dts --clean --banner.js '#!/usr/bin/env node'",
+    "dev": "tsup src/cli.ts --format esm --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "7zip-min": "^3.0.1",
+    "archiver": "^7.0.1",
+    "commander": "^14.0.3",
+    "node-qpdf2": "^6.0.0",
+    "node-unrar-js": "^2.0.2",
+    "officecrypto-tool": "^0.0.19",
+    "unzipper": "^0.12.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3"
+  }
+}
