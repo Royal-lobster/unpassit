@@ -1,17 +1,21 @@
 import { Command } from "commander";
 import path from "node:path";
 import fs from "node:fs";
+import { fileURLToPath } from "node:url";
 import { detectHandler } from "./detector.js";
 import { resolvePassword } from "./password.js";
 import { getOutputPath, log, logError } from "./utils.js";
 import { getSupportedExtensions } from "./detector.js";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const pkg = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../package.json"), "utf8"));
 
 const program = new Command();
 
 program
   .name("unlockit")
   .description("Remove passwords from protected files (PDF, Office, ZIP, RAR, 7z)")
-  .version("1.0.0", "-V, --version")
+  .version(pkg.version, "-V, --version")
   .argument("<input>", "File or directory to unlock")
   .option("-p, --password <password>", "Password for the protected file(s)")
   .option("-o, --output <dir>", "Output directory (default: same as source)")
